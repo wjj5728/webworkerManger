@@ -13,20 +13,18 @@ interface postMessageAction {
 class WebworkerManger {
   private worker: Worker | null = null;
   private actionHandlerMap = new Map<number, Function>();
-  private name = '';
   private url = '';
   uuid = 0;
   private get Ins() {
     if (this.worker == null) {
-      this.worker = new Worker(this.url, { name: this.name });
+      this.worker = new Worker(this.url);
       this.init();
     }
     return this.worker;
   }
-  constructor(url = './webworker.js', name: string) {
+  constructor(url = './webworker.js') {
     this.url = url;
-    this.name = name;
-    this.worker = new Worker(this.url, { name: this.name });
+    this.worker = new Worker(this.url);
     this.init();
   }
   init() {

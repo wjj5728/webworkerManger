@@ -18,22 +18,20 @@ var actionName = /** @class */ (function () {
     return actionName;
 }());
 var WebworkerManger = /** @class */ (function () {
-    function WebworkerManger(url, name) {
+    function WebworkerManger(url) {
         if (url === void 0) { url = './webworker.js'; }
         this.worker = null;
         this.actionHandlerMap = new Map();
-        this.name = '';
         this.url = '';
         this.uuid = 0;
         this.url = url;
-        this.name = name;
-        this.worker = new Worker(this.url, { name: this.name });
+        this.worker = new Worker(this.url);
         this.init();
     }
     Object.defineProperty(WebworkerManger.prototype, "Ins", {
         get: function () {
             if (this.worker == null) {
-                this.worker = new Worker(this.url, { name: this.name });
+                this.worker = new Worker(this.url);
                 this.init();
             }
             return this.worker;
